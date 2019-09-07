@@ -1,0 +1,11 @@
+{
+  "directory": "source/vendors/",
+  "scripts": {},
+  "storage": {
+    "packages": ".bower/packages",
+    "registry": ".bower/registry",
+    "links": ".bower/links"
+  },
+  "tmp": ".bower/tmp",
+  "strict-ssl": false
+}

@@ -1,0 +1,10 @@
+.bower/
+.idea/
+build/
+node_modules/
+source/vendors/
+source/scripts/vendors.js
+**/*.css
+**/*.css.map
+yarn-error.log
+.env

@@ -1,0 +1,13 @@
+node_modules
+build
+gulp
+gulpfile.js
+source/vendors
+source/scripts/vendors.js
+*.png
+*.jpg
+*.json
+*.eot
+*.ttf
+*.woff
+*.woff2

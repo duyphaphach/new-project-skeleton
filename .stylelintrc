@@ -1,0 +1,105 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "no-eol-whitespace": null,
+    "no-descending-specificity": null,
+    "selector-class-pattern": ["^[a-z]+([a-z0-9]?|[a-z0-9\\-]*[a-z0-9])$", {
+      "message": "Please name CSS classes like this: 'text-white'",
+      "severity": "warning"
+    }],
+    "selector-id-pattern": ["^[a-z]+([a-z0-9]?|[a-z0-9\\_]*[a-z0-9])$", {
+      "message": "Please name CSS ids like this: 'section_1'",
+      "severity": "warning"
+    }],
+    "order/order": [
+      "custom-properties",
+      "declarations"
+    ],
+    "order/properties-order": [
+      {
+        "order": "flexible",
+        "properties": [
+          "position",
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ]
+      },
+      {
+        "order": "flexible",
+        "properties": [
+          "flex",
+          "flex-direction",
+          "flex-order",
+          "flex-pack",
+          "flex-align"
+        ]
+      },
+      {
+        "order": "flexible",
+        "properties": [
+          "margin",
+          "margin-top",
+          "margin-right",
+          "margin-bottom",
+          "margin-left"
+        ]
+      },
+      {
+        "order": "flexible",
+        "properties": [
+          "font",
+          "font-family",
+          "font-size",
+          "font-style",
+          "font-weight"
+        ]
+      },
+      {
+        "order": "flexible",
+        "properties": [
+          "background",
+          "background-color",
+          "background-image",
+          "background-repeat",
+          "background-attachment",
+          "background-position",
+          "background-position-x",
+          "background-position-y",
+          "background-clip",
+          "background-origin",
+          "background-size"
+        ]
+      },
+      {
+        "order": "flexible",
+        "properties": [
+          "transition",
+          "transition-delay",
+          "transition-timing-function",
+          "transition-duration",
+          "transition-property"
+        ]
+      },
+      {
+        "order": "flexible",
+        "properties": [
+          "animation",
+          "animation-name",
+          "animation-duration",
+          "animation-fill-mode",
+          "animation-play-state",
+          "animation-timing-function",
+          "animation-delay",
+          "animation-iteration-count",
+          "animation-direction"
+        ]
+      }
+    ]
+  }
+}

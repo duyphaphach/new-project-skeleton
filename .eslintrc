@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "plugin:jest/recommended",
+    "airbnb-base"
+  ],
+  "globals": {
+    "$": true,
+    "scaleApp": true
+  },
+  "rules": {
+    "no-underscore-dangle": 0,
+    "func-names": 0,
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "argsIgnorePattern": "sandbox"
+      }
+    ]
+  }
+}

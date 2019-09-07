@@ -1,0 +1,5 @@
+.bower
+.git
+node_modules
+build/docker-image.tar
+yarn-error.log

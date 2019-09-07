@@ -1,0 +1,50 @@
+version: '3.2'
+
+services:
+  nginx-proxy:
+    container_name: ${CONTAINER_NAME_PREFIX}-nginx-proxy
+    image: jwilder/nginx-proxy:alpine
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "${DATA_PATH_HOST}/nginx-data/conf.d:/etc/nginx/conf.d"
+      - "${DATA_PATH_HOST}/nginx-data/vhost.d:/etc/nginx/vhost.d"
+      - "${DATA_PATH_HOST}/nginx-data/html:/usr/share/nginx/html"
+      - "${DATA_PATH_HOST}/nginx-data/certs:/etc/nginx/certs:ro"
+      - "${DATA_PATH_HOST}/nginx-data/htpasswd:/etc/nginx/htpasswd:ro"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    networks:
+      - nginx-proxy
+  nginx-letsencrypt:
+    container_name: ${CONTAINER_NAME_PREFIX}-nginx-letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - "${DATA_PATH_HOST}/nginx-data/conf.d:/etc/nginx/conf.d"
+      - "${DATA_PATH_HOST}/nginx-data/vhost.d:/etc/nginx/vhost.d"
+      - "${DATA_PATH_HOST}/nginx-data/html:/usr/share/nginx/html"
+      - "${DATA_PATH_HOST}/nginx-data/certs:/etc/nginx/certs:rw"
+      - "${DATA_PATH_HOST}/nginx-data/htpasswd:/etc/nginx/htpasswd:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  web:
+    container_name: ${CONTAINER_NAME_PREFIX}-web
+    restart: always
+    build:
+      context: .
+    networks:
+      - nginx-proxy
+    environment:
+      - VIRTUAL_HOST=${WEB_URL}
+      - VIRTUAL_PORT=${WEB_PORT}
+      - LETSENCRYPT_HOST=${WEB_URL}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+networks:
+  nginx-proxy:
+    external:
+      name: nginx-proxy
