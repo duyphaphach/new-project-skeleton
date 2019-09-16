@@ -9,8 +9,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const webpackDashboard = require("webpack-dashboard/plugin");
 
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 
@@ -123,17 +121,17 @@ const webpackConfig = removeEmpty({
     extensions: ['.json', '.js', '.jsx'],
   },
   stats: {
-    assets: false,
-    cached: false,
-    cachedAssets: false,
+    assets: true,
+    cached: true,
+    cachedAssets: true,
     colors: true,
-    version: false,
+    version: true,
     hash: true,
     timings: true,
-    chunks: false,
-    chunkModules: false,
-    entrypoints: false,
-    modules: false,
+    chunks: true,
+    chunkModules: true,
+    entrypoints: true,
+    modules: true,
   },
   plugins: removeEmpty([
     ifProduction(
@@ -150,27 +148,12 @@ const webpackConfig = removeEmpty({
       filename: 'index.html',
       template: `${APP_DIR}/templates/index.swig`,
       chunks: ['main'],
-      meta: {
-        'theme-color': '#0C5073',
-      },
     }),
     new HtmlWebpackPlugin({
       title: 'Kim khi - 1',
       filename: 'about.html',
       template: `${APP_DIR}/templates/pages/about.swig`,
       chunks: ['main'],
-      meta: {
-        'theme-color': '#0C5073',
-      },
-    }),
-    new HtmlWebpackPlugin({
-      title: 'Kim khi - 1',
-      filename: 'contact.html',
-      template: `${APP_DIR}/templates/pages/contact.swig`,
-      chunks: ['main'],
-      meta: {
-        'theme-color': '#0C5073',
-      },
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
@@ -179,7 +162,6 @@ const webpackConfig = removeEmpty({
       append: false,
       hash: true,
     }),
-    new webpackDashboard(),
     ifProduction(new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].css',
@@ -193,11 +175,6 @@ const webpackConfig = removeEmpty({
       },
       canPrint: false,
     })),
-    // ifProduction(new FaviconsWebpackPlugin({
-    //   logo: './source/assets/images/logo.png',
-    //   title: 'linkedbooster.app',
-    //   persistentCache: false,
-    // })),
     ifProduction(new OfflinePlugin()),
   ]),
 });
