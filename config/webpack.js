@@ -21,7 +21,7 @@ const webpackConfig = removeEmpty({
   mode: ifProduction('production', 'development'),
   context: appRootDir,
   entry: removeEmpty({
-    'main': './source/scripts/index.js',
+    main: './source/scripts/index.js',
   }),
   output: {
     path: BUILD_DIR,
@@ -145,15 +145,13 @@ const webpackConfig = removeEmpty({
     ]),
     new HtmlWebpackPlugin({
       title: 'Kim khi - 1',
-      filename: 'index.html',
-      template: `${APP_DIR}/templates/index.swig`,
-      chunks: ['main'],
+      filename: 'about.html',
+      template: `${APP_DIR}/templates/pages/about.swig`,
     }),
     new HtmlWebpackPlugin({
       title: 'Kim khi - 1',
-      filename: 'about.html',
-      template: `${APP_DIR}/templates/pages/about.swig`,
-      chunks: ['main'],
+      filename: 'index.html',
+      template: `${APP_DIR}/templates/index.swig`,
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
